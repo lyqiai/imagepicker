@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="str_confirm">ينهي</string>
+    <string name="str_selected_count">تم تحديد٪d</string>
+    <string name="str_all_photo">كل الصور</string>
+    <string name="str_view_photo">تصفح الصور</string>
+    <string name="str_max_selected_photo_tip">حدد ما يصل إلى٪d صورة</string>
+</resources>
