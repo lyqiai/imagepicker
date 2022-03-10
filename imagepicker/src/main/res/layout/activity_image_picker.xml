@@ -29,7 +29,6 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/str_all_photo"
             android:textColor="@color/icon"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +68,6 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:foreground="?android:selectableItemBackground"
-            android:text="@string/str_confirm"
             app:layout_constraintBaseline_toBaselineOf="@id/selected_count"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
