@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="str_confirm">完成</string>
-    <string name="str_selected_count">已选%d张</string>
-    <string name="str_all_photo">所有图片</string>
-    <string name="str_view_photo">浏览图片</string>
-    <string name="str_max_selected_photo_tip">最多选择%d张图片</string>
-</resources>

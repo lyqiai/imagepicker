@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="str_confirm">Complete</string>
-    <string name="str_selected_count">Selected%d</string>
-    <string name="str_all_photo">All pictures</string>
-    <string name="str_view_photo">Browse pictures</string>
-    <string name="str_max_selected_photo_tip">Select up to %d pictures</string>
-</resources>

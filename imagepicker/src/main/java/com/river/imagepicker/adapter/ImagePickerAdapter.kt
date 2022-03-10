@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.river.imagepicker.ImagePicker
 import com.river.imagepicker.R
 import com.river.imagepicker.entry.LocalMedia
 
@@ -61,14 +62,7 @@ class ImagePickerAdapter(val context: Context, val maxSelectedCount: Int) :
                 checkBoxContainer.setOnClickListener {
                     if (!checkBox.isChecked) {
                         if (selectedList.size >= maxSelectedCount) {
-                            Toast.makeText(
-                                context,
-                                String.format(
-                                    context.getString(R.string.str_max_selected_photo_tip),
-                                    maxSelectedCount
-                                ),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(context, String.format(ImagePicker.outMaxSelectedTip, maxSelectedCount), Toast.LENGTH_SHORT).show()
                             return@setOnClickListener
                         }
                         selectedList.add(item)
@@ -108,13 +102,16 @@ class ImagePickerAdapter(val context: Context, val maxSelectedCount: Int) :
 
     fun insertFirstAndSelected(localMedia: LocalMedia) {
         localMediaList.add(0, localMedia)
-        selectedList.add(localMedia)
+        if (selectedList.size < maxSelectedCount) {
+            selectedList.add(localMedia)
+        }
         selectedChangedListener?.invoke(selectedList.size)
         notifyItemInserted(1)
     }
 
     fun setSelectedList(selected: List<LocalMedia>) {
         selectedList = selected.map {selectedItem-> localMediaList.first {allItem->  allItem.id == selectedItem.id} }.toMutableList()
+        selectedChangedListener?.invoke(selectedList.size)
         notifyDataSetChanged()
     }
 

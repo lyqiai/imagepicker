@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/action_bar"
@@ -61,11 +62,13 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/str_selected_count" />
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/action_confirm"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:foreground="?android:selectableItemBackground"
             android:text="@string/str_confirm"
             app:layout_constraintBaseline_toBaselineOf="@id/selected_count"
             app:layout_constraintEnd_toEndOf="parent" />
