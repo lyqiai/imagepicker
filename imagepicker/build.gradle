@@ -30,16 +30,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
 
-    afterEvaluate {
-        publishing {
-            publications {
-                release(MavenPublication) {
-                    from components.release
-                    groupId = 'com.river.imagepicker'
-                    artifactId = 'imagepicker'
-                    version = '1.0'
-                }
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.river.imagepicker'
+                artifactId = 'imagepicker'
+                version = '1.0'
             }
         }
     }
