@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
 import com.river.imagepicker.adapter.ImagePickerAdapter
 import com.river.imagepicker.decoration.GridSpaceDecoration
 import com.river.imagepicker.util.*
@@ -36,8 +36,9 @@ import java.util.*
 class ImagePickerActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var selectedCountText: TextView
-    private lateinit var actionConfirm: MaterialButton
+    private lateinit var actionConfirm: Button
     private lateinit var actionBack: ImageView
+    private lateinit var title: TextView
 
     private lateinit var adapter: ImagePickerAdapter
 
@@ -59,8 +60,13 @@ class ImagePickerActivity : AppCompatActivity() {
         selectedCountText = findViewById(R.id.selected_count)
         actionConfirm = findViewById(R.id.action_confirm)
         actionBack = findViewById(R.id.action_back)
+        title = findViewById(R.id.title)
 
-        setSelectedCountText(0)
+        title.text = ImagePicker.title
+
+        actionConfirm.text = ImagePicker.confirm
+
+        setSelectedCountText(selectedIds?.size ?: 0)
 
         adapter = ImagePickerAdapter(this, maxSelectedCount)
         adapter.selectedChangedListener = this::setSelectedCountText
@@ -85,16 +91,16 @@ class ImagePickerActivity : AppCompatActivity() {
         actionConfirm.setOnClickListener(this::handleConfirm)
 
         checkPermission(
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            CODE_PERM_WRITE_EXTERNAL_STORAGE,
-            this::loadData
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                CODE_PERM_WRITE_EXTERNAL_STORAGE,
+                this::loadData
         )
     }
 
     private fun checkPermission(
-        permissions: Array<String>,
-        requestCode: Int,
-        callback: () -> Unit
+            permissions: Array<String>,
+            requestCode: Int,
+            callback: () -> Unit
     ) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val lostPerms = permissions.filter { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
@@ -128,11 +134,11 @@ class ImagePickerActivity : AppCompatActivity() {
 
     private fun onItemClickListener(position: Int) {
         PreviewImageDialog.show(
-            supportFragmentManager,
-            adapter.getData(),
-            adapter.getSelectedList(),
-            maxSelectedCount,
-            position
+                supportFragmentManager,
+                adapter.getData(),
+                adapter.getSelectedList(),
+                maxSelectedCount,
+                position
         ) {
             adapter.setSelectedList(it)
         }
@@ -146,14 +152,14 @@ class ImagePickerActivity : AppCompatActivity() {
     }
 
     private fun setSelectedCountText(count: Int) {
-        selectedCountText.text = String.format(getString(R.string.str_selected_count), count)
+        selectedCountText.text = String.format(ImagePicker.selectedCount, count)
     }
 
     private fun loadData() {
         lifecycleScope.launch(Dispatchers.IO) {
             val localMediaList = MediaUtil.loadImages(this@ImagePickerActivity)
             val selectedLocalMediaList =
-                localMediaList.filter { selectedIds?.contains(it.id) ?: false }
+                    localMediaList.filter { selectedIds?.contains(it.id) ?: false }
             if (isFinishing || isDestroyed) {
                 return@launch
             }
@@ -169,8 +175,8 @@ class ImagePickerActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && requestCode == CODE_TAKE_PIC) {
             MediaUtil.refreshPhotoAlbum(this@ImagePickerActivity, tempFile!!) { path, uri ->
                 val localMedia = MediaUtil.queryImageByPath(
-                    this@ImagePickerActivity,
-                    path
+                        this@ImagePickerActivity,
+                        path
                 )
                 if (localMedia != null) {
                     recyclerView.post {
@@ -182,9 +188,9 @@ class ImagePickerActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CODE_PERM_WRITE_EXTERNAL_STORAGE) {

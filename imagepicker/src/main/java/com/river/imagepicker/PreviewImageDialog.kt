@@ -30,6 +30,8 @@ class PreviewImageDialog : DialogFragment() {
     private lateinit var name: TextView
     private lateinit var checkBox: CheckBox
     private lateinit var checkBoxContainer: FrameLayout
+    private lateinit var title: TextView
+
     var listener: ((selected: List<LocalMedia>) -> Unit)? = null
 
     private var defaultPosition = 0
@@ -78,13 +80,14 @@ class PreviewImageDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        title = view.findViewById(R.id.title)
         actionBack = view.findViewById(R.id.action_back)
         viewpager = view.findViewById(R.id.viewpager)
         name = view.findViewById(R.id.name)
         checkBox = view.findViewById(R.id.checkbox)
         checkBoxContainer = view.findViewById(R.id.checkbox_container)
 
+        title.text = ImagePicker.preview
         name.text = data[defaultPosition].name
         checkBox.isChecked = isChecked(defaultPosition)
 
@@ -116,7 +119,7 @@ class PreviewImageDialog : DialogFragment() {
 
         if (!checkBox.isChecked) {
             if (selectedList.size >= maxSelectedCount) {
-                Toast.makeText(context, String.format(requireContext().getString(R.string.str_max_selected_photo_tip), maxSelectedCount), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, String.format(ImagePicker.outMaxSelectedTip, maxSelectedCount), Toast.LENGTH_SHORT).show()
                 return
             }
             selectedList.add(item)
