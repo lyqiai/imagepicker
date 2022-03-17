@@ -60,3 +60,23 @@ class ImagePicker {
     }
 }
 ```
+
+## 集成
+根目录build.gradle添加：
+
+```groovy
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+}
+```
+
+模块build.gradl添加：
+
+```groovy
+dependencies {
+        implementation 'com.github.lyqiai:imagepicker:0.0.1'
+}
+```
