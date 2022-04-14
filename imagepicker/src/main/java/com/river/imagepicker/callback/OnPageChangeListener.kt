@@ -4,7 +4,7 @@ import androidx.viewpager.widget.ViewPager
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 open class OnPageChangeListener: ViewPager.OnPageChangeListener {

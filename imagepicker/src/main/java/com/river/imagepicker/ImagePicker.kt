@@ -11,7 +11,7 @@ import com.river.imagepicker.entry.LocalMedia
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 class ImagePicker(private val activity: FragmentActivity) {
@@ -40,7 +40,7 @@ class ImagePicker(private val activity: FragmentActivity) {
 
     companion object {
         var title: String = "所有图片"
-        var selectedCount: String = "已选%D张"
+        var selectedCount: String = "已选%d张"
         var confirm: String = "完成"
         var preview: String = "浏览图片"
         var outMaxSelectedTip: String = "最多选择%d张图片"

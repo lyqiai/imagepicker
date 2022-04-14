@@ -10,7 +10,7 @@ import com.river.imagepicker.entry.LocalMedia
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 class PreviewImageAdapter(val context: Context, val data: List<LocalMedia>) : PagerAdapter() {

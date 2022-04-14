@@ -8,7 +8,7 @@ import java.io.File
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 object FileUtil {

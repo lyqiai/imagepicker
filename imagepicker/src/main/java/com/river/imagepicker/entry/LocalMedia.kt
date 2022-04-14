@@ -4,7 +4,7 @@ import java.io.Serializable
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 data class LocalMedia(

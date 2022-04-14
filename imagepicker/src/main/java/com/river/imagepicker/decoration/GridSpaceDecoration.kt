@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 class GridSpaceDecoration(val offset: Int) : RecyclerView.ItemDecoration() {

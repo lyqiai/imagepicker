@@ -18,6 +18,42 @@ dependencies {
 }
 
 ```
+
+AndroidManifest.xml:
+```
+<provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="包名.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+</provider>
+```
+
+file_paths.xml:
+```
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <external-path
+        name="files_root"
+        path="." />
+    <cache-path
+        name="cache_files"
+        path="pics" />
+    <external-files-path
+        name="download"
+        path="." />
+</paths>
+```
+
+### 权限
+```xml
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+```
+
 ### 使用
 ```kotlin
 val imagePicker = ImagePicker(FragmentActivity)
@@ -53,7 +89,7 @@ data class LocalMedia(
 class ImagePicker {
     companion object {
             var title: String = "所有图片"
-            var selectedCount: String = "已选%D张"
+            var selectedCount: String = "已选%d张"
             var confirm: String = "完成"
             var preview: String = "浏览图片"
             var outMaxSelectedTip: String = "最多选择%d张图片" //必须包含%d

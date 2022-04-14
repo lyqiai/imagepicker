@@ -21,7 +21,7 @@ import kotlin.math.absoluteValue
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 class PreviewImageDialog : DialogFragment() {
@@ -52,7 +52,7 @@ class PreviewImageDialog : DialogFragment() {
             lp.height = WindowManager.LayoutParams.MATCH_PARENT
             lp.dimAmount = 1F
             attributes = lp
-            setBackgroundDrawable(ColorDrawable(R.color.black))
+            setBackgroundDrawable(ColorDrawable(android.R.color.background_dark))
         }
 
         return dialog
@@ -65,7 +65,7 @@ class PreviewImageDialog : DialogFragment() {
             defaultPosition = getInt("defaultPosition", 0)
             data = getSerializable("data") as List<LocalMedia>? ?: emptyList()
             val temp = getSerializable("selectedList") as MutableList<LocalMedia>? ?: mutableListOf()
-            selectedList = data.filter {allItem-> temp.any {selectedItem ->  selectedItem.id == allItem.id} }.toMutableList()
+            selectedList = data.filter { allItem -> temp.any { selectedItem -> selectedItem.id == allItem.id } }.toMutableList()
             maxSelectedCount = getInt("maxSelectedCount", Int.MAX_VALUE)
         }
     }
@@ -119,7 +119,11 @@ class PreviewImageDialog : DialogFragment() {
 
         if (!checkBox.isChecked) {
             if (selectedList.size >= maxSelectedCount) {
-                Toast.makeText(context, String.format(ImagePicker.outMaxSelectedTip, maxSelectedCount), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    String.format(ImagePicker.outMaxSelectedTip, maxSelectedCount),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return
             }
             selectedList.add(item)
@@ -181,10 +185,7 @@ class PreviewImageDialog : DialogFragment() {
         return isCost
     }
 
-    private fun allowHandleTouchEvent() =
-        disY.absoluteValue > disX.absoluteValue && disY.absoluteValue >= ViewConfiguration.get(
-            context
-        ).scaledTouchSlop
+    private fun allowHandleTouchEvent() = disY.absoluteValue > disX.absoluteValue && disY.absoluteValue >= ViewConfiguration.get(context).scaledTouchSlop
 
     private fun reset() {
         val originAlpha = dialog?.window?.attributes?.dimAmount ?: 1F

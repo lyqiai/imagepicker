@@ -4,7 +4,7 @@ import android.animation.Animator
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 open class AnimatorListener :  Animator.AnimatorListener {

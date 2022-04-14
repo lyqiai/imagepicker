@@ -16,7 +16,7 @@ import com.river.imagepicker.entry.LocalMedia
 
 /**
 
- * @Author river
+ * @Author River
  * @Date 2021/11/1-10:24
  */
 class ImagePickerAdapter(val context: Context, val maxSelectedCount: Int) :
@@ -55,7 +55,7 @@ class ImagePickerAdapter(val context: Context, val maxSelectedCount: Int) :
                 val item = localMediaList[position - 1]
 
                 if (allowLoadImage) {
-                    Glide.with(context).load(item.uri).override(width, width).centerCrop().into(image)
+                    Glide.with(context).load(item.uri).thumbnail(0.35f).centerCrop().into(image)
                 }
 
                 checkBox.isChecked = selectedList.contains(item)
